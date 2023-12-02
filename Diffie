@@ -1,0 +1,21 @@
+def diffie_hellman(p, g, private_key):
+    return pow(g, private_key, p)
+
+# Example usage:
+p, g = 23, 5  # Prime number and primitive root modulo p
+
+# Alice and Bob generate private keys
+alice_private_key, bob_private_key = 6, 15
+
+# Compute public keys
+alice_public_key = diffie_hellman(p, g, alice_private_key)
+bob_public_key = diffie_hellman(p, g, bob_private_key)
+
+# Both parties compute the shared secret
+alice_shared_secret = diffie_hellman(p, bob_public_key, alice_private_key)
+bob_shared_secret = diffie_hellman(p, alice_public_key, bob_private_key)
+
+print("Alice's public key:", alice_public_key)
+print("Bob's public key:", bob_public_key)
+print("Shared Secret computed by Alice:", alice_shared_secret)
+print("Shared Secret computed by Bob:", bob_shared_secret)
